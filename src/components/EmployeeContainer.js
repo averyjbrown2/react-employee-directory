@@ -9,20 +9,20 @@ import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchEmployees("Nicholas");
+    this.searchEmployees("Sarah");
   }
 
   searchEmployees = query => {
     API.search(query)
       .then(res => {
-        console.log("THIS IS" + res.data.results[0].name.title);
-        this.setState({ result: res.data.results.name.title })
+        console.log("THIS IS " + res.data.results);
+        //this.setState({ result: res.data.results.name })
       })
       .catch(err => console.log(err));
   };
@@ -49,7 +49,7 @@ class EmployeeContainer extends Component {
             <Card
               heading={this.state.result.name || "Search for an Employee to Begin"}
             >
-              {this.state.result.Title ? (
+              {this.state.result.name ? (
                 <EmployeeDetail
                   title={this.state.result.name}
                   src={this.state.result.title}
