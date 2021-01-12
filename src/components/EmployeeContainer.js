@@ -15,12 +15,15 @@ class EmployeeContainer extends Component {
 
   // When this component mounts, search for the movie "The Matrix"
   componentDidMount() {
-    this.searchEmployees("Nicholas");
+    this.searchEmployees("");
   }
 
   searchEmployees = query => {
     API.search(query)
-      .then(res => this.setState({ result: res.data.data }))
+      .then(res => {
+        console.log("THIS IS" + res.data.results);
+        this.setState({ result: res.data.results.name })
+      })
       .catch(err => console.log(err));
   };
 
